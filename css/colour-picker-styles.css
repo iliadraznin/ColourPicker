@@ -1,0 +1,103 @@
+body { -webkit-user-select:none }
+#colourPicker {
+	display:block;
+	width:460px; height:274px;
+	padding:8px;
+	background:#434445;
+	color:#ddd;
+	border:1px solid #232425;
+	box-shadow:rgba(0,0,0,.6) 0 0 8px;
+	border-radius:3px;
+	position:absolute;
+	top:100px; left:100px;
+}
+#colourPicker .gradient-bar {
+	float:left;
+	width:256px; height:256px;
+	position:relative;
+	background-color:#f00;
+	background-image:linear-gradient(90deg, #fff, transparent);
+	overflow:hidden;
+}
+#colourPicker .gradient-bar:after {
+	content:'';
+	display:block;
+	height:100%; width:100%;
+	background-image:linear-gradient(transparent, #000);
+}
+#colourPicker .gradient-pointer {
+	display:block;
+	width:10px; height:10px;
+	border:1px solid rgba(255,255,255,.7);
+	box-shadow:rgba(0,0,0,.7) 0 0 0 1px;
+	border-radius:50%;
+	position:absolute;
+	top:0; left:0;
+	margin:-5px 0 0 -5px;
+}
+#colourPicker .hue-bar {
+	float:left;
+	width:20px; height:256px;
+	position:relative;
+	margin:0 12px;
+	background:url(../img/hue-bar.png);
+}
+#colourPicker .hue-pointer {
+	display:block;
+	width:100%; height:0;
+	position:absolute;
+	bottom:0; left:0;
+}
+#colourPicker .hue-pointer:after, 
+#colourPicker .hue-pointer:before {
+	content:'';
+	display:block;
+	width:8px; height:6px;
+	background:#ccc;
+	border:1px solid #000;
+	position:absolute;
+	bottom:-3px;
+}
+#colourPicker .hue-pointer:after { left:100%; border-radius; border-radius:12px 0 0 12px/8px 0 0 8px }
+#colourPicker .hue-pointer:before { left:-10px; border-radius:0 12px 12px 0/0 8px 8px 0 }
+
+#colourPicker .picker-controls {
+	float:left;
+	position:relative;
+	/*background:#666;*/
+	width:142px;
+}
+#colourPicker .colors-wrap {
+	width:100%; height:48px;
+	border:1px solid #000;
+	position:relative;
+	margin-bottom:8px;
+}
+#colourPicker .colors-wrap div { position:absolute; width:50%; background:#fff }
+#colourPicker .new-color1 { left:0; height:50% }
+#colourPicker .new-color2 { left:0; top:50%; height:50% }
+#colourPicker .old-color { left:50%; top:0; height:100% }
+#colourPicker .color-inputs { font-size:1.1em }
+#colourPicker .color-inputs label { float:left; width:50% }
+#colourPicker .color-inputs input {
+	background:#333435;
+	color:#ccc;
+	border:1px solid #222;
+	font-family:monospace;
+	font-size:1.3em;
+	width:60px;
+	margin-bottom:8px;
+	-webkit-transition:all .2s linear;
+			transition:all .2s linear;
+}
+#colourPicker .color-inputs input:hover {
+	background:#232425;
+	color:#eee;
+}
+#colourPicker .color-inputs input:focus {
+	background:#111;
+	border-color:#999;
+	color:#fff;
+}
+#colourPicker .color-inputs .hex-wrap { width:100% }
+#colourPicker .hex-wrap input { width:100px }
