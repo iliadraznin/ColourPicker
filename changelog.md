@@ -1,5 +1,9 @@
 # Colour Picker
 
+### 0.92 (June 14, 2013)
+- Added tabindex attribute to the color input fields
+- For Firefox added increment/decrement via arrows up and down functionality, similar to Chrome's built-in one for inputs of type number
+
 ### 0.9 (June 14, 2013)
 - Almost final release, only the hook into input type=color and OK/Cancel buttons are left
 - Uses the latest [Color.js v1.6](https://github.com/iliadraznin/Color.js)

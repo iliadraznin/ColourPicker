@@ -149,9 +149,17 @@ $(function() {
 	});
 
 	_cp.on('keydown', '.colorin', function(e) {
-		var key = e.keyCode,
-			isUtilKey = key == 8 || key == 9 || key == 13,
-			validKey;
+		var key = e.which,
+			isUtilKey, validKey;
+		
+		isUtilKey = 
+			key == 8 ||					// backspace
+			key == 9 ||					// tab
+			key == 13 ||				// enter
+			key == 46 ||				// delete
+			(key >= 37 && key <= 40);	// arrows
+
+		console.log(key);
 
 		switch (e.target.className) {
 			case 'colorin pick-hue':
@@ -162,6 +170,27 @@ $(function() {
 			case 'colorin pick-blue':
 				validKey = (key >= 48 && key <= 57) || isUtilKey;
 				if (!validKey /*|| e.target.value.length >= 3*/) e.preventDefault();
+
+				// browser doesn't support input type number $(this)[0].type == 'text'
+				// and hitting arrows up or down increment the number outselves
+				if ($(this)[0].type == 'text' && (key == 38 || key == 40)) {
+					e.preventDefault();
+					// convert value to int and get max and min values
+					var that 	= $(this),
+						valInt 	= +that.val(),
+						max 	= +that.attr('max'),
+						min 	= +that.attr('min');
+
+					// up
+					if (key == 38 && valInt < max) {
+						that.val(valInt + 1).change();
+					}
+					// down
+					else if (key == 40 && valInt > min) {
+						that.val(valInt - 1).change();
+					}
+				}
+
 				break;
 
 			case 'colorin pick-hex':
@@ -197,10 +226,4 @@ $(function() {
 		fHex[0].value = hex;
 		fHex.change();
 	});
-
-	var c1 = new Color(200, 60, 120),
-		c2 = new Color(334, 70, 78),
-		c3 = new Color();
-
-	console.log( c1, c2, c3 );
 });
