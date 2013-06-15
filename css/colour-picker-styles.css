@@ -61,25 +61,30 @@ body { -webkit-user-select:none }
 #colourPicker .hue-pointer:after { left:100%; border-radius; border-radius:12px 0 0 12px/8px 0 0 8px }
 #colourPicker .hue-pointer:before { left:-10px; border-radius:0 12px 12px 0/0 8px 8px 0 }
 
-#colourPicker .picker-controls {
-	float:left;
-	position:relative;
-	/*background:#666;*/
-	width:142px;
-}
+#colourPicker .picker-controls { float:left; position:relative; width:142px }
 #colourPicker .colors-wrap {
-	width:100%; height:48px;
+	width:100%; height:64px;
 	border:1px solid #000;
 	position:relative;
 	margin-bottom:8px;
 }
 #colourPicker .colors-wrap div { position:absolute; width:50%; background:#fff }
-#colourPicker .new-color1 { left:0; height:50% }
-#colourPicker .new-color2 { left:0; top:50%; height:50% }
+#colourPicker .colors-wrap label {
+	font-family:monospace;
+	font-size:1.2em;
+	background:rgba(0,0,0,.5);
+	padding:1px 3px;
+	position:absolute;
+	-webkit-user-select:normal;
+}
+#colourPicker .sel-color { left:0; height:50% }
+#colourPicker .new-color { left:0; top:50%; height:50% }
 #colourPicker .old-color { left:50%; top:0; height:100% }
+#colourPicker .sel-color label { left:0; top:0 }
+#colourPicker .old-color label { right:0; top:0 }
 #colourPicker .color-inputs { font-size:1.1em }
 #colourPicker .color-inputs label { float:left; width:50% }
-#colourPicker .color-inputs input {
+#colourPicker .colorin {
 	background:#333435;
 	color:#ccc;
 	border:1px solid #222;
@@ -90,14 +95,14 @@ body { -webkit-user-select:none }
 	-webkit-transition:all .2s linear;
 			transition:all .2s linear;
 }
-#colourPicker .color-inputs input:hover {
+#colourPicker .colorin:hover {
 	background:#232425;
 	color:#eee;
 }
-#colourPicker .color-inputs input:focus {
+#colourPicker .colorin:focus {
 	background:#111;
 	border-color:#999;
 	color:#fff;
 }
 #colourPicker .color-inputs .hex-wrap { width:100% }
-#colourPicker .hex-wrap input { width:100px }
+#colourPicker .hex-wrap .colorin { width:100px }

@@ -4,7 +4,7 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-	<title>Colour Picker v0.7</title>
+	<title>Colour Picker v0.9</title>
 
 	<link rel="stylesheet" href="css/colour-picker-base.css">
 	<link rel="stylesheet" href="css/colour-picker-styles.css">
@@ -17,33 +17,33 @@
 		<div class="hue-bar"><div class="hue-pointer"></div></div>
 		<div class="picker-controls">
 			<div class="colors-wrap">
-				<div class="new-color1" title="New Color"></div>
-				<div class="new-color2" title="New Color"></div>
-				<div class="old-color" title="Current Color"></div>
+				<div class="sel-color" title="Selected Color"><label class="sel-col-label">#ffffff</label></div>
+				<div class="new-color" title="New Color"></div>
+				<div class="old-color" title="Original Color"><label class="old-col-label">#ffffff</label></div>
 			</div>
-			<div class="color-inputs clr">
+			<div class="color-inputs clr"><form autocomplete="off">
 				<label class="hex-wrap">Hex #
-					<input type="text" class="pick-hex" value="ffffff" maxlength="6">
+					<input type="text" class="colorin pick-hex" value="ffffff" maxlength="6">
 				</label>
 				<label>Red
-					<input type="number" class="pick-red" value="255" min="0" max="255" maxlength="3">
+					<input type="number" class="colorin pick-red" value="255" min="0" max="255" maxlength="3">
 				</label>
 				<label>Hue
-					<input type="number" class="pick-hue" value="0" min="0" max="359" maxlength="3">&deg;
+					<input type="number" class="colorin pick-hue" value="0" min="0" max="359" maxlength="3">&deg;
 				</label>
 				<label>Green
-					<input type="number" class="pick-green" value="255" min="0" max="255" maxlength="3">
+					<input type="number" class="colorin pick-green" value="255" min="0" max="255" maxlength="3">
 				</label>
 				<label>Saturation
-					<input type="number" class="pick-saturation" value="0" min="0" max="100" maxlength="3">%
+					<input type="number" class="colorin pick-saturation" value="0" min="0" max="100" maxlength="3">%
 				</label>
 				<label>Blue
-					<input type="number" class="pick-blue" value="255" min="0" max="255" maxlength="3">
+					<input type="number" class="colorin pick-blue" value="255" min="0" max="255" maxlength="3">
 				</label>
 				<label>Brightness
-					<input type="number" class="pick-brightness" value="100" min="0" max="100" maxlength="3">%
+					<input type="number" class="colorin pick-brightness" value="100" min="0" max="100" maxlength="3">%
 				</label>
-			</div>
+			</form></div>
 		</div>
 	</div>
 
