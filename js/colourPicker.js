@@ -1,143 +1,3 @@
-/*!
- * Colour Picker plugin for jQuery; published under the WTFPL license http://sam.zoy.org/wtfpl/
- *
- * @author Ilia Draznin
- * @created 2013/06/05
- * @version 1.0
- *
- * Description: The Colour Picker emulates and extends the native Photoshop color picker.
- * 
- * Usage:
- * $(selector).colourPicker();
- * "selector" can be either one or more input elements of type color
- * or a container with a number of input[type=color] elements, to which it will apply
- */
-
-;(function( $, window, document, undefined ) {
-
-	// setup the plugin name and the default properties
-	var pluginName = "colourPicker",
-		defaults = { ignoreNative: true },
-		colorSupported = $('<input type="color"/>')[0].type == 'color';
-
-	// plugin constructor
-	function Plugin(element, options) {
-		this.options = $.extend( {}, defaults, options );
-
-		// if color is supported by browser and ignoreNative is false
-		// we can abort construction since the native color input will be used
-		if (colorSupported && !this.options.ignoreNative) {
-			console.info('Using native color input');
-			return;
-		}
-
-		var el = $(element);
-		// now that plugin is being used we filter out non type color elements
-		if (el.attr('type') != 'color') return;
-
-		// finally, before proceeding convert the color element into regular text element
-		// and give it a class to identify as color input
-		el.attr('type', 'text').addClass('color-input');
-
-		this.element = element;
-		this._defaults = defaults;
-		this._name = pluginName;
-
-		this.init();
-	}
-
-	//  plugin functions
-	Plugin.prototype = {
-		init: function() {
-			var _cp = $('<div id="colourPicker"></div>'),
-
-				// gradient and hue bars
-				_gp = $('<div class="gradient-pointer"></div>'),
-				_gb = $('<div class="gradient-bar"></div>').append(_gp),
-				_hp = $('<div class="hue-pointer"></div>'),
-				_hb = $('<div class="hue-bar"></div>').append(_hp),
-
-				gradientDrag = false,
-				hueDrag 	 = false,
-
-				// color inputs
-				cf 		= $('<form autocomplete="off" class="clr"></form>'),
-				fHex 	= $('<input type="text" class="colorin pick-hex" maxlength="6" tabindex="1">'),
-				fRed 	= $('<input type="number" class="colorin pick-red" min="0" max="255" maxlength="3" tabindex="2">'),
-				fGreen 	= $('<input type="number" class="colorin pick-green" min="0" max="255" maxlength="3" tabindex="3">'),
-				fBlue 	= $('<input type="number" class="colorin pick-blue" min="0" max="255" maxlength="3" tabindex="4">'),
-				fHue 	= $('<input type="number" class="colorin pick-hue" min="0" max="359" maxlength="3" tabindex="5">'),
-				fSat 	= $('<input type="number" class="colorin pick-saturation" min="0" max="100" maxlength="3" tabindex="6">'),
-				fVal 	= $('<input type="number" class="colorin pick-brightness" min="0" max="100" maxlength="3" tabindex="7">'),
-
-				// buttons
-				_btnSelect = $('<button type="button" class="cp-btn" id="selectColor">Select</button>'),
-				_btnCancel = $('<button type="button" class="cp-btn" id="cancelColor">Cancel</button>'),
-
-				// color boxes
-				pc 			= $('<div class="picker-controls"></div>'),
-				selColLabel = $('<label class="sel-col-label"></label>'),
-				selColor 	= $('<div class="sel-color" title="Selected Color"></div>').append(selColLabel),			
-				newColor 	= $('<div class="new-color" title="New Color"></div>'),
-				oldColLabel = $('<label class="old-col-label"></label>'),
-				oldColor 	= $('<div class="old-color" title="Original Color"></div>').append(oldColLabel);
-
-			// combine the color fields in the color inputs form
-			cf.append( $('<label class="hex-wrap">Hex #</label>').append(fHex) )
-				.append( $('<label>Red</label>').append(fRed) )
-				.append( $('<label>Hue</label>').append(fHue).append('&deg;') )
-				.append( $('<label>Green</label>').append(fGreen) )
-				.append( $('<label>Saturation</label>').append(fSat).append('%') )
-				.append( $('<label>Blue</label>').append(fBlue) )
-				.append( $('<label>Brightness</label>').append(fVal).append('%') )
-				.append( _btnSelect )
-				.append( _btnCancel );
-
-			// combine rest of the elements
-			_cp.append(_gb)
-				.append(_hb)
-				.append(
-					pc.append( 
-						$('<div class="colors-wrap"></div>')
-							.append(selColor)
-							.append(newColor)
-							.append(oldColor) 
-					)
-					.append(
-						$('<div class="color-inputs clr"></div>')
-							.append(cf)
-					)
-				);
-
-			// add the whole widget to the page
-			$('body').append(_cp);
-
-			// get the offset positions for hue and gradient bars
-			var gbOffset = _gb.offset(),
-				hbOffset = _hb.offset();
-
-		//	_cp.hide();
-		},
-
-		otherfunction: function(el, options) {
-
-		}
-	};
-
-	// wrapper around the plugin constructor
-	$.fn[pluginName] = function(options) {
-		return this.each(function() {
-			if (!$.data(this, "plugin_" + pluginName)) {
-				$.data(this, "plugin_" + pluginName, new Plugin(this, options));
-			}
-		});
-	}
-
-})( jQuery, window, document );
-
-
-
-/*
 (function($) {
 	$.fn.colourPicker = function(options) {
 		// setup defaults
@@ -485,4 +345,141 @@
 	(); // buildColorPicker()
 
 })(jQuery);
+
+/*!
+ * Colour Picker plugin for jQuery; published under the WTFPL license http://sam.zoy.org/wtfpl/
+ *
+ * @author Ilia Draznin
+ * @created 2013/06/05
+ * @version 1.0
+ *
+ * Description: The Colour Picker emulates and extends the native Photoshop color picker.
+ * 
+ * Usage:
+ * $(selector).colourPicker();
+ * "selector" can be either one or more input elements of type color
+ * or a container with a number of input[type=color] elements, to which it will apply
+ */
+/*
+;(function( $, window, document, undefined ) {
+
+	// setup the plugin name and the default properties
+	var pluginName = "colourPicker",
+		defaults = { ignoreNative: true },
+		colorSupported = $('<input type="color"/>')[0].type == 'color';
+
+	// plugin constructor
+	function Plugin(element, options) {
+		this.options = $.extend( {}, defaults, options );
+
+		// if color is supported by browser and ignoreNative is false
+		// we can abort construction since the native color input will be used
+		if (colorSupported && !this.options.ignoreNative) {
+			console.info('Using native color input');
+			return;
+		}
+
+		var el = $(element);
+		// now that plugin is being used we filter out non type color elements
+		if (el.attr('type') != 'color') return;
+
+		// finally, before proceeding convert the color element into regular text element
+		// and give it a class to identify as color input
+		el.attr('type', 'text').addClass('color-input');
+
+		this.element = element;
+		this._defaults = defaults;
+		this._name = pluginName;
+
+		this.init();
+	}
+
+	//  plugin functions
+	Plugin.prototype = {
+		init: function() {
+			var _cp = $('<div id="colourPicker"></div>'),
+
+				// gradient and hue bars
+				_gp = $('<div class="gradient-pointer"></div>'),
+				_gb = $('<div class="gradient-bar"></div>').append(_gp),
+				_hp = $('<div class="hue-pointer"></div>'),
+				_hb = $('<div class="hue-bar"></div>').append(_hp),
+
+				gradientDrag = false,
+				hueDrag 	 = false,
+
+				// color inputs
+				cf 		= $('<form autocomplete="off" class="clr"></form>'),
+				fHex 	= $('<input type="text" class="colorin pick-hex" maxlength="6" tabindex="1">'),
+				fRed 	= $('<input type="number" class="colorin pick-red" min="0" max="255" maxlength="3" tabindex="2">'),
+				fGreen 	= $('<input type="number" class="colorin pick-green" min="0" max="255" maxlength="3" tabindex="3">'),
+				fBlue 	= $('<input type="number" class="colorin pick-blue" min="0" max="255" maxlength="3" tabindex="4">'),
+				fHue 	= $('<input type="number" class="colorin pick-hue" min="0" max="359" maxlength="3" tabindex="5">'),
+				fSat 	= $('<input type="number" class="colorin pick-saturation" min="0" max="100" maxlength="3" tabindex="6">'),
+				fVal 	= $('<input type="number" class="colorin pick-brightness" min="0" max="100" maxlength="3" tabindex="7">'),
+
+				// buttons
+				_btnSelect = $('<button type="button" class="cp-btn" id="selectColor">Select</button>'),
+				_btnCancel = $('<button type="button" class="cp-btn" id="cancelColor">Cancel</button>'),
+
+				// color boxes
+				pc 			= $('<div class="picker-controls"></div>'),
+				selColLabel = $('<label class="sel-col-label"></label>'),
+				selColor 	= $('<div class="sel-color" title="Selected Color"></div>').append(selColLabel),			
+				newColor 	= $('<div class="new-color" title="New Color"></div>'),
+				oldColLabel = $('<label class="old-col-label"></label>'),
+				oldColor 	= $('<div class="old-color" title="Original Color"></div>').append(oldColLabel);
+
+			// combine the color fields in the color inputs form
+			cf.append( $('<label class="hex-wrap">Hex #</label>').append(fHex) )
+				.append( $('<label>Red</label>').append(fRed) )
+				.append( $('<label>Hue</label>').append(fHue).append('&deg;') )
+				.append( $('<label>Green</label>').append(fGreen) )
+				.append( $('<label>Saturation</label>').append(fSat).append('%') )
+				.append( $('<label>Blue</label>').append(fBlue) )
+				.append( $('<label>Brightness</label>').append(fVal).append('%') )
+				.append( _btnSelect )
+				.append( _btnCancel );
+
+			// combine rest of the elements
+			_cp.append(_gb)
+				.append(_hb)
+				.append(
+					pc.append( 
+						$('<div class="colors-wrap"></div>')
+							.append(selColor)
+							.append(newColor)
+							.append(oldColor) 
+					)
+					.append(
+						$('<div class="color-inputs clr"></div>')
+							.append(cf)
+					)
+				);
+
+			// add the whole widget to the page
+			$('body').append(_cp);
+
+			// get the offset positions for hue and gradient bars
+			var gbOffset = _gb.offset(),
+				hbOffset = _hb.offset();
+
+		//	_cp.hide();
+		},
+
+		otherfunction: function(el, options) {
+
+		}
+	};
+
+	// wrapper around the plugin constructor
+	$.fn[pluginName] = function(options) {
+		return this.each(function() {
+			if (!$.data(this, "plugin_" + pluginName)) {
+				$.data(this, "plugin_" + pluginName, new Plugin(this, options));
+			}
+		});
+	}
+
+})( jQuery, window, document );
 */
